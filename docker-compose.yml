@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - SADSOD_SECRET=CHANGE_ME_IN_PROD
+      - DATABASE_URL=postgresql://sadsod:sadsodpass@db:5432/sadsoddb
+    depends_on:
+      - db
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=sadsod
+      - POSTGRES_PASSWORD=sadsodpass
+      - POSTGRES_DB=sadsoddb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
