@@ -495,10 +495,8 @@ def seed():
             db.session.add(ShippingRate(wilaya=w, daira=None, price=600, eta="24-72 ساعة"))
     db.session.commit()
 
-@app.before_first_request
-def init_db():
+with app.app_context():
     db.create_all()
     seed()
-
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)
