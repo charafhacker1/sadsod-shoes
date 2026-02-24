@@ -72,7 +72,10 @@ def home():
 def checkout():
     wilayas = load_wilayas()   # ✅ آمن
     return render_template("checkout.html", wilayas=wilayas)
-
+@app.get("/shop")
+def shop():
+    products = Product.query.order_by(Product.created_at.desc()).all()
+    return render_template("shop.html", products=products)
 @app.get("/api/wilayas")
 def api_wilayas():
     return jsonify(load_wilayas())
