@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DATA_DIR = os.path.join(BASE_DIR, "data")   # ✅ تم التصحيح هنا
+DATA_DIR = os.path.join(BASE_DIR, "data")
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SADSOD_SECRET", "CHANGE_ME_IN_PROD")
