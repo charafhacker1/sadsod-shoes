@@ -79,7 +79,21 @@ def shop():
 @app.get("/api/wilayas")
 def api_wilayas():
     return jsonify(load_wilayas())
+@app.get("/cart")
+def cart():
+    cart = session.get("cart", {})
+    products = []
+    total = 0
 
+    if cart:
+        ids = [int(pid) for pid in cart.keys()]
+        products = Product.query.filter(Product.id.in_(ids)).all()
+
+        for p in products:
+            qty = int(cart.get(str(p.id), 0))
+            total += p.price * qty
+
+    return render_template("cart.html", products=products, cart=cart, total=total)
 # =======================
 # Seed
 # =======================
